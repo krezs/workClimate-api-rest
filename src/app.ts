@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
-import IndexRoutes from './routes'; //routes
+import { IndexRoutes, employeeRoute } from './routes';
 
 export class App {
     private app: Application;
@@ -22,6 +22,7 @@ export class App {
 
     routes() {
         this.app.use(IndexRoutes);
+        this.app.use('/employee', employeeRoute);
     }
 
     async listen() {
