@@ -8,16 +8,17 @@
  * @updateAt
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = require("../database");
+const typeorm_1 = require("typeorm");
+const entity_1 = require("../entity");
 class EmployeeController {
     /**
      * Returns all employees from db
      */
     static getEmployees() {
+        const employeeRepository = typeorm_1.getConnection(process.env.NODE_ENV).getRepository(entity_1.Employee);
         return new Promise((resolve, reject) => {
-            const con = database_1.connect();
-            con.query('SELECT * FROM employee')
-                .then((result) => resolve(result[0]), (error) => reject(error));
+            employeeRepository.find()
+                .then((result) => resolve(result), (error) => reject(error));
         });
     }
 }
