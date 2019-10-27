@@ -15,7 +15,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const typeorm_1 = require("typeorm");
 const body_parser_1 = __importDefault(require("body-parser"));
-const https_1 = require("https");
+const http_1 = require("http");
 const routes_1 = require("../routes");
 class Server {
     constructor(host, port) {
@@ -36,7 +36,7 @@ class Server {
         });
         //ROUTES
         app.use("/employee", routes_1.employeeRoute);
-        const server = https_1.createServer(app);
+        const server = http_1.createServer(app);
         server.listen(this.port, this.host, () => {
             console.log(`Server listening on http://${process.env.APP_HOST}:${process.env.APP_PORT}`);
         });

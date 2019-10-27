@@ -12,7 +12,7 @@ import cors from "cors";
 import { getConnection } from 'typeorm';
 import bodyParser from 'body-parser';
 import { IResponse } from '../interface';
-import { createServer } from 'https';
+import { createServer } from 'http';
 import { employeeRoute } from '../routes';
 
 export class Server {
@@ -36,7 +36,7 @@ export class Server {
         app.use(bodyParser.urlencoded({ extended : false }));
 
         app.get("/", (req, res) => {
-            res.send(`${APP_NAME} (v${VERSION}) - ${COMPANY}`)
+            res.send(`${APP_NAME} (v${VERSION}) - ${COMPANY}`);
         });
 
         //ROUTES

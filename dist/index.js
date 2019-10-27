@@ -1,35 +1,25 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const cluster_1 = __importDefault(require("cluster"));
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
+const server_1 = require("./server");
 typeorm_1.createConnection(process.env.NODE_ENV).then((connection) => {
+    if (cluster_1.default.isMaster) {
+        initialize();
+    }
+    else {
+        newServer();
+    }
 });
 function initialize() {
-    //ClientCommunication.initialize().then(() => new App());
-    /*
-        if (process.env.NODE_ENV === "production") {
-          cluster.on("online", (worker) => {
-            Logger.info(`Worker[${worker.process.pid}] process is running`);
-          });
-          cluster.on("exit", (worker, code, signal) => {
-            Logger.error(`Worker[${worker.process.pid}] died with code: ${code}, and signal: ${signal}`);
-            Logger.info(`Starting a new worker`);
-            cluster.fork();
-          });
-          cluster.on("message", (worker: cluster.Worker, message: IWorkerMessage) => {
-            const workerMessageType = message.messageType as unknown as keyof typeof EWorkerMessageType;
-            switch (+workerMessageType) {
-              case EWorkerMessageType.log:
-                Logger.info(`Message from [${worker.process.pid}]: ${message.message}`);
-                break;
-              default:
-                break;
-            }
-          });
-          os.cpus().forEach(() => cluster.fork());
-        } else {
-          newServer();
-        }
-        */
+    newServer();
+}
+function newServer() {
+    const server = new server_1.Server(process.env.APP_HOST, process.env.APP_PORT);
+    server.initialize();
 }
 //# sourceMappingURL=index.js.map
