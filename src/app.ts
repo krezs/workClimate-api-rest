@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import { IndexRoutes, employeeRoute } from './routes';
+import "reflect-metadata";
 
 export class App {
     private app: Application;

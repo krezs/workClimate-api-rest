@@ -19,8 +19,12 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "@types/node": "^12.11.7",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
-    "mysql2": "^1.7.0"
+    "mysql2": "^1.7.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.3",
+    "typeorm": "^0.2.20"
   }
 }
