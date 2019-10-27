@@ -1,19 +1,35 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = require("./app");
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const app = new app_1.App();
-        yield app.listen();
-    });
+require("reflect-metadata");
+const typeorm_1 = require("typeorm");
+typeorm_1.createConnection(process.env.NODE_ENV).then((connection) => {
+});
+function initialize() {
+    //ClientCommunication.initialize().then(() => new App());
+    /*
+        if (process.env.NODE_ENV === "production") {
+          cluster.on("online", (worker) => {
+            Logger.info(`Worker[${worker.process.pid}] process is running`);
+          });
+          cluster.on("exit", (worker, code, signal) => {
+            Logger.error(`Worker[${worker.process.pid}] died with code: ${code}, and signal: ${signal}`);
+            Logger.info(`Starting a new worker`);
+            cluster.fork();
+          });
+          cluster.on("message", (worker: cluster.Worker, message: IWorkerMessage) => {
+            const workerMessageType = message.messageType as unknown as keyof typeof EWorkerMessageType;
+            switch (+workerMessageType) {
+              case EWorkerMessageType.log:
+                Logger.info(`Message from [${worker.process.pid}]: ${message.message}`);
+                break;
+              default:
+                break;
+            }
+          });
+          os.cpus().forEach(() => cluster.fork());
+        } else {
+          newServer();
+        }
+        */
 }
-main();
+//# sourceMappingURL=index.js.map
