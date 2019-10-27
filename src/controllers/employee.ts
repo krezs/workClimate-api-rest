@@ -7,20 +7,22 @@
  * @updateAt
  */
 
-import { connect } from '../database';
+ import { getConnection } from 'typeorm';
+import { Employee } from '../entity';
 
 export class EmployeeController {
+
     /**
      * Returns all employees from db
      */
-    public static getEmployees(){
+    public static getEmployees() {
+        const employeeRepository = getConnection(process.env.NODE_ENV).getRepository(Employee);
         return new Promise((resolve, reject) => {
-            const con = connect();
-            con.query('SELECT * FROM employee')
-            .then(
-                (result) => resolve(result[0]),
-                (error) => reject(error)
-            );
+            employeeRepository.find()
+                .then(
+                    (result) => resolve(result),
+                    (error) => reject(error)
+                );
         });
     }
 }

@@ -1,8 +1,23 @@
-import { App } from './app';
+import cluster from "cluster";
+import "reflect-metadata";
+import {createConnection, Connection} from "typeorm";
+import { Server } from "./server";
 
-async function main(){
-    const app = new App(3000);
-    await app.listen();
+createConnection(process.env.NODE_ENV).then(
+    (connection: Connection) => {
+        if(cluster.isMaster) {
+            initialize();
+        }else{
+            newServer();
+        }
+    }
+);
+
+function initialize() {
+    newServer();
 }
 
-main();
+function newServer() {
+    const server = new Server(process.env.APP_HOST, process.env.APP_PORT);
+    server.initialize();
+}
