@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# Survey Project with typeORM, expressJS
 
 Steps to run this project:
 
@@ -30,7 +30,10 @@ Steps to run this project:
        }
     }
 ```    
-3. Run `npm start` command
-4. Create .env file with enviroment variables
+3. Create .env file with enviroment variables
+```
     APP_HOST = '127.0.0.1'
     APP_PORT = '3000'
+```
+4. Run `npm start` command
+ 
