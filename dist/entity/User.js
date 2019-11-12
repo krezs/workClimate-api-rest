@@ -40,6 +40,16 @@ function buildPasswordHash(instance) {
     });
 }
 let User = class User {
+    constructor(values) {
+        if (values) {
+            for (const [key, value] of Object.entries(values)) {
+                this[key] = value;
+            }
+        }
+    }
+    checkPassword(password) {
+        return bcrypt_1.default.compare(password, this.password);
+    }
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
@@ -94,7 +104,8 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "token", void 0);
 User = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity(),
+    __metadata("design:paramtypes", [Object])
 ], User);
 exports.User = User;
 //# sourceMappingURL=User.js.map

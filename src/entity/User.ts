@@ -7,8 +7,9 @@
  * @updateAt
  */
 
- import bcryp from "bcrypt";
+import bcryp from "bcrypt";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { IUser } from "../interface";
 
  async function buildPasswordHash(instance: any){
      if(instance.password && instance.password !== "" && instance.password !== null) {
@@ -59,7 +60,17 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
     @Column({ nullable: true, length: 500 })
     public token: string;
 
+    constructor(values?: IUser) {
+        if(values){
+            for (const [key, value] of Object.entries(values)){
+                (this as any)[key] = value;
+            }
+        }
+    }
 
+    public checkPassword(password: string) {
+        return bcryp.compare(password, this.password);
+    }
 
 
 
