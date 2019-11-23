@@ -1,7 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function indexWelcome(req, res) {
-    return res.json("Welcome to my API");
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-exports.indexWelcome = indexWelcome;
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./employee"));
+__export(require("./session"));
 //# sourceMappingURL=index.js.map
