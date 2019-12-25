@@ -10,17 +10,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const entity_1 = require("../entity");
 const typeorm_1 = require("typeorm");
-class UserControler {
+class UserController {
     /**
      * Returns all user registered in User table database
      */
     static getUser() {
         const userRepository = typeorm_1.getConnection(process.env.NODE_ENV).getRepository(entity_1.User);
         return new Promise((resolve, reject) => {
-            return new Promise((resolve, reject) => {
-                userRepository.find()
-                    .then((result) => resolve(result), (error) => reject(error));
-            });
+            userRepository.find()
+                .then(result => resolve(result), error => reject(error));
         });
     }
     /**
@@ -31,6 +29,7 @@ class UserControler {
     static saveUser(body, createdById) {
         const user = new entity_1.User(body);
         user.createdById = createdById;
+        //user.createAt
         const userRepository = typeorm_1.getConnection(process.env.NODE_ENV).getRepository(entity_1.User);
         return new Promise((resolve, reject) => {
             userRepository.save(user)
@@ -38,5 +37,5 @@ class UserControler {
         });
     }
 }
-exports.UserControler = UserControler;
+exports.UserController = UserController;
 //# sourceMappingURL=user.js.map

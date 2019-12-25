@@ -18,11 +18,11 @@ import { IUser } from "../interface";
      }
  }
 
- @Entity()
+ @Entity("user")
  export class User {
 
     @PrimaryGeneratedColumn()
-    public id: number;
+    public userId: number;
 
     @Column({ nullable: false, length: 100 })
     public firstName: string;
@@ -71,8 +71,4 @@ import { IUser } from "../interface";
     public checkPassword(password: string) {
         return bcryp.compare(password, this.password);
     }
-
-
-
-
  }

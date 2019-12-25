@@ -10,7 +10,7 @@
  import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
  import { IEmployee } from '../interface';
 
- @Entity()
+ @Entity("employee")
  export class Employee {
 
     @PrimaryGeneratedColumn()

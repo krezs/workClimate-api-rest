@@ -4,7 +4,7 @@ import { IResponse } from '../interface/response';
 const router: Router = Router();
 
 
-router.get("/", (req: Request, res: Response) =>{
+router.get("/", (req: Request, res: Response) => {
     EmployeeController.getEmployees().then(
         (result) => {
             const response: IResponse = {

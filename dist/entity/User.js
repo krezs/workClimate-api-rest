@@ -54,7 +54,7 @@ let User = class User {
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], User.prototype, "userId", void 0);
 __decorate([
     typeorm_1.Column({ nullable: false, length: 100 }),
     __metadata("design:type", String)
@@ -104,7 +104,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "token", void 0);
 User = __decorate([
-    typeorm_1.Entity(),
+    typeorm_1.Entity("user"),
     __metadata("design:paramtypes", [Object])
 ], User);
 exports.User = User;

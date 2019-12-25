@@ -11,7 +11,7 @@ import { IUser } from "../interface";
 import { User } from "../entity";
 import { getConnection } from "typeorm";
 
-export class UserControler {
+export class UserController {
     
     /**
      * Returns all user registered in User table database
@@ -19,13 +19,11 @@ export class UserControler {
     public static getUser() {
         const userRepository = getConnection(process.env.NODE_ENV).getRepository(User);
         return new Promise((resolve, reject) => {
-            return new Promise((resolve, reject) => {
-                userRepository.find()
-                    .then(
-                        (result) => resolve(result),
-                        (error) => reject(error)
-                    );
-            });
+            userRepository.find()
+            .then(
+                result => resolve(result),
+                error => reject(error)
+            );
         });
     }
 
@@ -37,6 +35,7 @@ export class UserControler {
     public static saveUser(body: IUser, createdById: number) {
         const user = new User(body);
         user.createdById = createdById;
+        //user.createAt
         const userRepository = getConnection(process.env.NODE_ENV).getRepository(User);
         return new Promise((resolve, reject) => {
             userRepository.save(user)

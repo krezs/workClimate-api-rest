@@ -44,7 +44,7 @@ __decorate([
     __metadata("design:type", String)
 ], Employee.prototype, "rut", void 0);
 Employee = __decorate([
-    typeorm_1.Entity(),
+    typeorm_1.Entity("employee"),
     __metadata("design:paramtypes", [Object])
 ], Employee);
 exports.Employee = Employee;

@@ -12,37 +12,37 @@ const express_1 = require("express");
 const controllers_1 = require("../controllers");
 const router = express_1.Router();
 router.get("/", (req, res) => {
-    controllers_1.UserControler.getUser().then((result) => {
+    controllers_1.UserController.getUser().then(result => {
         const response = {
             data: result,
-            status: true
+            status: true,
         };
         res.send(response);
-    }, (error) => {
+    }, error => {
         const response = {
+            status: false,
             error,
-            status: false
         };
+        res.send(response);
     });
 });
-//create new user post endpoint
 router.post("/", (req, res) => {
-    const createdById = 1; // TODO: next feature add corresponding id
-    controllers_1.UserControler.saveUser(req.body, createdById).then((result) => {
+    const userCreatedById = 1; // TODO: incoming feature (add corresponding id to CreatedById)
+    controllers_1.UserController.saveUser(req.body, userCreatedById).then(result => {
         const response = {
-            message: "User Created Succesfully",
+            message: "User created succesfully",
             data: result,
             status: true
         };
         res.send(response);
-    }, (error) => {
+    }, error => {
         const response = {
             message: "User creation failed",
+            status: false,
             error,
-            status: false
         };
         res.send(response);
     });
-    //UserController
 });
+exports.userRouter = router;
 //# sourceMappingURL=user.js.map

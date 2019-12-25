@@ -8,50 +8,52 @@
  */
 
 import { Request, Response, Router } from "express";
-import { UserControler } from "../controllers";
+import { UserController } from "../controllers";
 import { IResponse } from "../interface";
 
- const router: Router = Router();
+const router: Router = Router();
 
 router.get("/", (req: Request, res: Response) => {
-    UserControler.getUser().then(
-        (result) => {
+    UserController.getUser().then(
+        result => {
             const response: IResponse = {
                 data: result,
-                status: true
-            }
-            res.send(response)
+                status: true,
+            };
+            res.send(response);
         },
-        (error) => {
+        error => {
             const response: IResponse = {
+                status : false,
                 error,
-                status: false
-            }
+            };
+            res.send(response);
+        }
+    );
+
+});
+
+
+router.post("/", (req: Request, res: Response) => {
+    const userCreatedById = 1; // TODO: incoming feature (add corresponding id to CreatedById)
+    UserController.saveUser(req.body, userCreatedById).then(
+        result => {
+            const response: IResponse = {
+                message: "User created succesfully",
+                data: result,
+                status: true
+            };
+            res.send(response);
+        },
+        error => {
+            const response: IResponse = {
+                message: "User creation failed",
+                status: false,
+                error,
+            };
+            res.send(response);
         }
     );
 });
 
-
- //create new user post endpoint
- router.post("/", (req: Request, res: Response) => {
-    const createdById = 1; // TODO: next feature add corresponding id
-    UserControler.saveUser(req.body, createdById).then(
-        (result) => {
-            const response: IResponse = {
-                message: "User Created Succesfully",
-                data: result,
-                status: true
-            }
-            res.send(response);
-        },
-        (error) => {
-            const response: IResponse = {
-                message: "User creation failed",
-                error,
-                status: false
-            }
-            res.send(response);
-        }
-    );
-    //UserController
- });
+ export const userRouter: Router = router;

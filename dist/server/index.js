@@ -36,6 +36,8 @@ class Server {
         });
         //ROUTES
         app.use("/employee", routes_1.employeeRoute);
+        app.use("/session", routes_1.sessionRouter);
+        app.use("/user", routes_1.userRouter);
         const server = http_1.createServer(app);
         server.listen(this.port, this.host, () => {
             console.log(`Server listening on http://${process.env.APP_HOST}:${process.env.APP_PORT}`);

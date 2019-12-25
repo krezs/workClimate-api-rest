@@ -13,7 +13,7 @@ import { getConnection } from 'typeorm';
 import bodyParser from 'body-parser';
 import { IResponse } from '../interface';
 import { createServer } from 'http';
-import { employeeRoute } from '../routes';
+import { employeeRoute, userRouter, sessionRouter } from '../routes';
 
 export class Server {
     private host: string;
@@ -41,6 +41,8 @@ export class Server {
 
         //ROUTES
         app.use("/employee", employeeRoute);
+        app.use("/session", sessionRouter)
+        app.use("/user", userRouter);
         
         const server = createServer(app);
         server.listen(this.port, this.host, () => {
