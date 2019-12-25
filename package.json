@@ -22,10 +22,13 @@
    },
    "dependencies": {
       "@types/bcrypt": "^3.0.0",
+      "@types/moment-timezone": "^0.5.12",
       "@types/node": "^12.11.7",
       "bcrypt": "^3.0.6",
       "cors": "^2.8.5",
       "express": "^4.17.1",
+      "moment": "^2.24.0",
+      "moment-timezone": "^0.5.27",
       "morgan": "^1.9.1",
       "mysql": "^2.14.1",
       "mysql2": "^1.7.0",
