@@ -8,8 +8,9 @@
  */
 
 import bcryp from "bcrypt";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
 import { IUser } from "../interface";
+import { datetimeUtil } from "../util/datetimeUtil";
 
  async function buildPasswordHash(instance: any){
      if(instance.password && instance.password !== "" && instance.password !== null) {
@@ -70,5 +71,12 @@ import { IUser } from "../interface";
 
     public checkPassword(password: string) {
         return bcryp.compare(password, this.password);
+    }
+
+    @BeforeInsert()
+    public async setBeforeInsert(){
+        this.createAt = datetimeUtil.getCurrentDateTimeAsDate();
+        this.password = await buildPasswordHash(this);
+        this.isDisabled = false;
     }
  }

@@ -31,6 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const typeorm_1 = require("typeorm");
+const datetimeUtil_1 = require("../util/datetimeUtil");
 function buildPasswordHash(instance) {
     return __awaiter(this, void 0, void 0, function* () {
         if (instance.password && instance.password !== "" && instance.password !== null) {
@@ -49,6 +50,13 @@ let User = class User {
     }
     checkPassword(password) {
         return bcrypt_1.default.compare(password, this.password);
+    }
+    setBeforeInsert() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.createAt = datetimeUtil_1.datetimeUtil.getCurrentDateTimeAsDate();
+            this.password = yield buildPasswordHash(this);
+            this.isDisabled = false;
+        });
     }
 };
 __decorate([
@@ -103,6 +111,12 @@ __decorate([
     typeorm_1.Column({ nullable: true, length: 500 }),
     __metadata("design:type", String)
 ], User.prototype, "token", void 0);
+__decorate([
+    typeorm_1.BeforeInsert(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], User.prototype, "setBeforeInsert", null);
 User = __decorate([
     typeorm_1.Entity("user"),
     __metadata("design:paramtypes", [Object])
